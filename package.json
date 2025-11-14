@@ -1,0 +1,28 @@
+{
+  "name": "clip-trimmer",
+  "version": "1.0.0",
+  "description": "短いクリップのトリミングに特化したWebアプリ",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "postinstall": "node copy-ffmpeg-files.js",
+    "start": "npx http-server . -p 8000 --cors",
+    "dev": "npx http-server . -p 8000 --cors"
+  },
+  "keywords": [
+    "video",
+    "trimmer",
+    "ffmpeg",
+    "wasm"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1",
+    "@ffmpeg/core": "^0.12.6"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

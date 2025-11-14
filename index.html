@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipTrimmer - 動画トリミングツール</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ClipTrimmer</h1>
+            <p>短いクリップのトリミングに特化したWebアプリ</p>
+        </header>
+
+        <main>
+            <!-- ファイル読み込みセクション -->
+            <div class="upload-section">
+                <input type="file" id="videoInput" accept="video/*" />
+                <label for="videoInput" class="upload-btn">
+                    <span>📁 動画ファイルを選択</span>
+                </label>
+                <span id="fileName" class="file-name"></span>
+            </div>
+
+            <!-- ビデオプレビューセクション -->
+            <div class="video-section">
+                <div class="video-wrapper">
+                    <video id="videoPlayer" controls></video>
+                    <div id="deletedOverlay" class="deleted-overlay"></div>
+                </div>
+                <div class="video-info">
+                    <span id="currentTime">00:00.000</span> / <span id="duration">00:00.000</span>
+                </div>
+            </div>
+
+            <!-- コントロールボタン -->
+            <div class="controls">
+                <button id="playPauseBtn" class="btn" disabled>
+                    <span>▶️ 再生</span>
+                </button>
+                <button id="cutBtn" class="btn btn-primary" disabled>
+                    <span>✂️ カット (C)</span>
+                </button>
+                <button id="deleteBtn" class="btn btn-danger" disabled>
+                    <span>🗑️ 削除 (Delete)</span>
+                </button>
+                <button id="exportBtn" class="btn btn-success" disabled>
+                    <span>💾 エクスポート</span>
+                </button>
+            </div>
+
+            <!-- タイムライン -->
+            <div class="timeline-section">
+                <div class="timeline-header">
+                    <h3>タイムライン</h3>
+                    <div class="timeline-info">
+                        <span id="clipCount">クリップ数: 0</span>
+                    </div>
+                </div>
+                <div class="timeline-container">
+                    <canvas id="timelineCanvas"></canvas>
+                    <div id="playhead" class="playhead"></div>
+                    <div id="clips" class="clips-container"></div>
+                </div>
+                <div class="timeline-ruler" id="timelineRuler"></div>
+            </div>
+
+            <!-- ステータス表示 -->
+            <div id="status" class="status"></div>
+        </main>
+
+        <footer>
+            <p>使い方: 動画を読み込み、再生ヘッドの位置でカットボタン(C)を押してクリップを分割。クリップをクリックで選択、ドラッグで移動、左右の端をドラッグしてリサイズ、Deleteキーで削除できます。Ctrl+Zで元に戻す、Ctrl+Yでやり直しができます。</p>
+        </footer>
+    </div>
+
+    <!-- FFmpeg.wasm を静的ファイルから読み込み -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

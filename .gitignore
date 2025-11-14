@@ -1,0 +1,25 @@
+# publicディレクトリは含める（WASMファイル用）
+!public/
+
+# node_modules内の@ffmpeg関連は含める
+node_modules/*
+#!node_modules/@ffmpeg/
+
+# OS固有
+.DS_Store
+
+# ログファイル
+*.log
+npm-debug.log*
+
+# エディタ設定
+.vscode/
+
+# ビルド出力
+dist/
+
+# 一時ファイル
+*.tmp
+
+# その他
+.env
