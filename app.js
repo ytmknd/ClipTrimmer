@@ -58,9 +58,9 @@ class ClipTrimmer {
         try {
             this.showStatus('FFmpegを読み込み中...', 'info');
             
-            // node_modulesからFFmpeg.wasmをインポート（相対パス）
-            const { FFmpeg } = await import('@ffmpeg/ffmpeg');
-            const { toBlobURL, fetchFile } = await import('@ffmpeg/util');
+            // publicディレクトリからFFmpeg.wasmをインポート
+            const { FFmpeg } = await import('./public/ffmpeg.js');
+            const { toBlobURL, fetchFile } = await import('./public/util.js');
             
             this.ffmpeg = new FFmpeg();
             
