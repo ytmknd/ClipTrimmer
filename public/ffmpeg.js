@@ -1,2 +1,2 @@
-export * from \\"./ffmpeg-classes.js\";
-export * from \\"./ffmpeg-types.js\";
+export * from "./ffmpeg-classes.js";
+export * from "./ffmpeg-types.js";
