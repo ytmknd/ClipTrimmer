@@ -75,6 +75,14 @@
         </footer>
     </div>
 
+    <!-- デバッグスクリプト -->
+    <script>
+        console.log('HTML loaded, timestamp:', new Date().toISOString());
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error, e.message, e.filename, e.lineno);
+        });
+    </script>
+    
     <!-- FFmpeg.wasm を静的ファイルから読み込み -->
     <script type="module" src="app.js"></script>
 </body>
