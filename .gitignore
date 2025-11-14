@@ -3,7 +3,7 @@
 
 # node_modules内の@ffmpeg関連は含める
 node_modules/*
-#!node_modules/@ffmpeg/
+!node_modules/@ffmpeg/
 
 # OS固有
 .DS_Store
