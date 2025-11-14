@@ -1,16 +1,22 @@
 // ClipTrimmer - メインアプリケーションファイル
+console.log('app.js loaded, importing Timeline...');
 import { Timeline } from './timeline.js';
+console.log('Timeline imported successfully');
 
 class ClipTrimmer {
     constructor() {
+        console.log('ClipTrimmer constructor called');
         this.ffmpeg = null;
         this.ffmpegLoaded = false;
         this.videoFile = null;
         this.videoDuration = 0;
         this.timeline = null;
         
+        console.log('Initializing elements...');
         this.initElements();
+        console.log('Initializing event listeners...');
         this.initEventListeners();
+        console.log('Starting to load FFmpeg...');
         this.loadFFmpeg();
     }
 
@@ -408,6 +414,13 @@ class ClipTrimmer {
 }
 
 // アプリケーションの起動
+console.log('DOM Content Loaded');
 document.addEventListener('DOMContentLoaded', () => {
-    new ClipTrimmer();
+    console.log('Initializing ClipTrimmer...');
+    try {
+        new ClipTrimmer();
+        console.log('ClipTrimmer initialized');
+    } catch (error) {
+        console.error('Failed to initialize ClipTrimmer:', error);
+    }
 });
