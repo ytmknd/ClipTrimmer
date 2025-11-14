@@ -58,9 +58,13 @@ class ClipTrimmer {
         try {
             this.showStatus('FFmpegを読み込み中...', 'info');
             
+            console.log('Importing FFmpeg modules...');
+            
             // publicディレクトリからFFmpeg.wasmをインポート
             const { FFmpeg } = await import('./public/ffmpeg.js');
             const { toBlobURL, fetchFile } = await import('./public/util.js');
+            
+            console.log('FFmpeg modules imported successfully');
             
             this.ffmpeg = new FFmpeg();
             
@@ -78,10 +82,17 @@ class ClipTrimmer {
             // publicディレクトリからWASMファイルを読み込み
             const baseURL = './public';
             
+            console.log('Creating blob URLs...');
+            const coreURL = await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript');
+            const wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm');
+            console.log('Blob URLs created, loading FFmpeg...');
+            
             await this.ffmpeg.load({
-                coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-                wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+                coreURL: coreURL,
+                wasmURL: wasmURL,
             });
+            
+            console.log('FFmpeg loaded successfully');
             
             this.ffmpegLoaded = true;
             this.showStatus('FFmpegの読み込みが完了しました', 'success');
