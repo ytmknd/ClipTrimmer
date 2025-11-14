@@ -107,7 +107,7 @@ export class FFmpeg {
                 }) :
                 // We need to duplicated the code here to enable webpack
                 // to bundle worekr.js here.
-                new Worker(new URL("./worker.js", import.meta.url), {
+                new Worker(new URL("./ffmpeg-worker.js", import.meta.url), {
                     type: "module",
                 });
             this.#registerHandlers();

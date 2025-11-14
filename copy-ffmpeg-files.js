@@ -29,6 +29,9 @@ function copyAndFixImports(src, dest, prefix) {
         // インポートパスを修正（プレフィックスを追加）
         content = content.replace(/from\s+['"]\.\//g, `from "./${prefix}`);
         
+        // worker.jsへの参照をffmpeg-worker.jsに修正
+        content = content.replace(/new URL\(["']\.\/worker\.js["']/g, `new URL("./ffmpeg-worker.js"`);
+        
         writeFileSync(dest, content, 'utf8');
         console.log(`✓ ${dest.split(/[\\\/]/).pop()} をコピーしました`);
     } catch (error) {
