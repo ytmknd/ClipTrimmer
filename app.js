@@ -1,22 +1,16 @@
 // ClipTrimmer - メインアプリケーションファイル
-console.log('app.js loaded, importing Timeline...');
 import { Timeline } from './timeline.js';
-console.log('Timeline imported successfully');
 
 class ClipTrimmer {
     constructor() {
-        console.log('ClipTrimmer constructor called');
         this.ffmpeg = null;
         this.ffmpegLoaded = false;
         this.videoFile = null;
         this.videoDuration = 0;
         this.timeline = null;
         
-        console.log('Initializing elements...');
         this.initElements();
-        console.log('Initializing event listeners...');
         this.initEventListeners();
-        console.log('Starting to load FFmpeg...');
         this.loadFFmpeg();
     }
 
@@ -64,13 +58,9 @@ class ClipTrimmer {
         try {
             this.showStatus('FFmpegを読み込み中...', 'info');
             
-            console.log('Importing FFmpeg modules...');
-            
             // publicディレクトリからFFmpeg.wasmをインポート
             const { FFmpeg } = await import('./public/ffmpeg.js');
             const { toBlobURL, fetchFile } = await import('./public/util.js');
-            
-            console.log('FFmpeg modules imported successfully');
             
             this.ffmpeg = new FFmpeg();
             
@@ -88,17 +78,10 @@ class ClipTrimmer {
             // publicディレクトリからWASMファイルを読み込み
             const baseURL = './public';
             
-            console.log('Creating blob URLs...');
-            const coreURL = await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript');
-            const wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm');
-            console.log('Blob URLs created, loading FFmpeg...');
-            
             await this.ffmpeg.load({
-                coreURL: coreURL,
-                wasmURL: wasmURL,
+                coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+                wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
             });
-            
-            console.log('FFmpeg loaded successfully');
             
             this.ffmpegLoaded = true;
             this.showStatus('FFmpegの読み込みが完了しました', 'success');
@@ -414,13 +397,6 @@ class ClipTrimmer {
 }
 
 // アプリケーションの起動
-console.log('DOM Content Loaded');
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Initializing ClipTrimmer...');
-    try {
-        new ClipTrimmer();
-        console.log('ClipTrimmer initialized');
-    } catch (error) {
-        console.error('Failed to initialize ClipTrimmer:', error);
-    }
+    new ClipTrimmer();
 });
